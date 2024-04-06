@@ -32,7 +32,7 @@ public class User {
 
     @Column(insertable = false, updatable= false)
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     public Long getId() {
         return Id;
@@ -74,11 +74,11 @@ public class User {
         this.birthday = birthday;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
