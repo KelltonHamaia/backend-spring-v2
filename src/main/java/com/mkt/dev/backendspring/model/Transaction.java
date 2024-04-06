@@ -5,6 +5,17 @@ import jakarta.persistence.*;
 @Entity
 public class Transaction {
 
+    public Transaction() {
+
+    }
+
+    public Transaction(TransactionAction action, int quantity, User user, Product product) {
+        this.action = action;
+        this.quantity = quantity;
+        this.user = user;
+        this.product = product;
+    }
+
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;

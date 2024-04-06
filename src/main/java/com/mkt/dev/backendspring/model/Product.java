@@ -6,6 +6,18 @@ import java.time.LocalDateTime;
 
 @Entity
 public class Product {
+
+    public Product() {
+
+    }
+
+    public Product(String name, String description, int stock, Category category) {
+        this.name = name;
+        this.description = description;
+        this.stock = stock;
+        this.category = category;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

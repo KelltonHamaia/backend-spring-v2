@@ -1,12 +1,22 @@
 package com.mkt.dev.backendspring.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 public class User {
+    public User () {
+
+    }
+    public User (String name, String email, String password, @DateTimeFormat(pattern = "dd/mm/yyyy") Date birthDay) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.birthday = birthDay;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
