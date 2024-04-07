@@ -3,6 +3,7 @@ package com.mkt.dev.backendspring.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 public class Product {
@@ -30,7 +31,7 @@ public class Product {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(insertable = false, updatable = false)
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     public Long getId() {
         return id;
@@ -72,11 +73,11 @@ public class Product {
         this.category = category;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(LocalDateTime updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
