@@ -14,6 +14,10 @@ public class CategoryController {
     @Autowired
     private CategoryServices categoryServices;
 
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @GetMapping(path = "/all")
     public Iterable<Category> getAllCategories() {
         return categoryServices.getAllCategories();

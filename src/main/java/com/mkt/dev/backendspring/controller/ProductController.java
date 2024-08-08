@@ -13,6 +13,10 @@ public class ProductController {
 
     @Autowired
     private ProductServices productServices;
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @GetMapping(path = "/all")
     public Iterable<Product> getAll() {
         return productServices.getAllProducts();
