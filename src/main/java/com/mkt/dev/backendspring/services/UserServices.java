@@ -1,5 +1,6 @@
 package com.mkt.dev.backendspring.services;
 
+import com.mkt.dev.backendspring.model.Category;
 import com.mkt.dev.backendspring.model.User;
 import com.mkt.dev.backendspring.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class UserServices {
     public String createNewUser( String name, String email, String password, @DateTimeFormat(pattern = "dd/MM/yyyy") Date birthday){
         Optional<User> alreadyExists = userRP.findByEmail(email);
         if(alreadyExists.isPresent()) {
-            return "user already exists.";
+            return null;
         }
         User user = new User(name, email, password, birthday);
         userRP.save(user);
@@ -31,6 +32,11 @@ public class UserServices {
     public Boolean loginUser(String email, String password) {
         Optional<User> user = userRP.findByEmail(email);
         return user.isPresent() && user.get().getPassword().equals(password);
+    }
+
+    public Boolean emailIsTaken(String email) {
+        Optional<User> user = userRP.findByEmail(email);
+        return user.isPresent();
     }
 
     public Iterable<User> getUsersByBirthdayBetween(Date offset, Date limit) {
@@ -68,6 +74,15 @@ public class UserServices {
     public Iterable<User> getLastLoggedUsers() {
         Date yesterday = new Date(System.currentTimeMillis() - (1000 * 3600 * 24));
         return userRP.findByUpdatedAtAfter(yesterday);
+    }
+
+    public String deleteUser(Long id) {
+        Optional<User> user = userRP.findById(id);
+
+        if(user.isEmpty()) return "User not found";
+
+        userRP.delete(user.get());
+        return "Category deleted";
     }
 
 }

@@ -15,8 +15,8 @@ public class CategoryController {
     private CategoryServices categoryServices;
 
     @CrossOrigin(originPatterns = {
-            "http://localhost:5173",
-            "http://localhost:3000"
+            "http://localhost:5173/",
+            "http://localhost:3000/"
     })
     @GetMapping(path = "/all")
     public Iterable<Category> getAllCategories() {
@@ -28,15 +28,27 @@ public class CategoryController {
         return categoryServices.getCategoryById(id);
     }
 
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @PostMapping(path = "/add")
     public String createNewCategory(@RequestParam String categoryName) {
         return categoryServices.createNewCategory(categoryName);
     }
+
 
     @PostMapping(path = "/update")
     public String updateCategory(@RequestParam Long id, @RequestParam(required = false) String categoryName) {
         return categoryServices.updateCategory(id, categoryName);
     }
 
-
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
+    @PostMapping(path= "/delete")
+    public String deleteCategory(@RequestParam Long id) {
+        return categoryServices.deleteCategory(id);
+    }
 }

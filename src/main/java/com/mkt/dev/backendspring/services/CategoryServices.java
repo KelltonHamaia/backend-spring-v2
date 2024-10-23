@@ -38,5 +38,12 @@ public class CategoryServices {
         }
         return "Category successfully updated.";
     }
+    public String deleteCategory(Long id) {
+        Optional<Category> category = categoryRP.findById(id);
 
+        if(category.isEmpty()) return "Category not found";
+
+        categoryRP.delete(category.get());
+        return "Category deleted";
+    }
 }

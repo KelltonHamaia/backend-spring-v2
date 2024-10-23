@@ -15,6 +15,11 @@ public class UserController {
 
     @Autowired
     private UserServices userServices;
+
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @PostMapping(path="/add")
     public String createNewUser(
             @RequestParam String name,
@@ -25,11 +30,27 @@ public class UserController {
         return userServices.createNewUser(name, email, password, birthday);
     };
 
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @PostMapping(path = "/login")
     public Boolean loginUser( @RequestParam String email, @RequestParam String password) {
         return userServices.loginUser(email, password);
     }
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
+    @PostMapping(path = "/exists")
+    public Boolean emailIsTaken( @RequestParam String email) {
+        return userServices.emailIsTaken(email);
+    }
 
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @PostMapping(path = "/update")
     public String updateUser(
             @RequestParam Long id,
@@ -38,10 +59,12 @@ public class UserController {
             @RequestParam(required = false) String new_password,
             @RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy") Date new_birthday)
     {
-
         return userServices.updateUser(id, new_name, new_email, new_password, new_birthday);
     }
-
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
     @GetMapping(path = "/all")
     public Iterable<User> getAllUsers() {
         return userServices.getAllUsers();
@@ -62,6 +85,15 @@ public class UserController {
     @GetMapping(path = "/lastloggedusers")
     public Iterable<User> getlastLoggedUsers(){
         return userServices.getLastLoggedUsers();
+    }
+
+    @CrossOrigin(originPatterns = {
+            "http://localhost:5173",
+            "http://localhost:3000"
+    })
+    @PostMapping(path= "/delete")
+    public String deleteCategory(@RequestParam Long id) {
+        return userServices.deleteUser(id);
     }
 
 }
